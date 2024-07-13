@@ -1,0 +1,289 @@
+<!doctype html>
+<html>
+<head>
+<script type="text/javascript" src="https://code.jquery.com/jquery-1.7.1.min.js"></script>
+<script type="text/javascript" src="turn.min.js"></script>
+<title>A story Written By Aditya Soni</title>
+<link rel="icon" href="advertisement.jpg" type="image/icon type">
+
+
+<style type="text/css">
+body {
+	background: linear-gradient(to right, #ffecd2 0%, #fcb69f 100%);
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	min-height: 100vh;
+	margin: 0;
+	color: #333;
+	font-family: 'Arial', sans-serif;
+}
+
+#book {
+	width: 800px;
+	height: 500px;
+	position: relative;
+	box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+#book .turn-page {
+	background-color: white;
+}
+
+#book .cover {
+	background-image: url(war.png);
+	color: white;
+}
+
+#book .cover h1 {
+	text-align: center;
+	font-size: 50px;
+	margin: 0;
+	padding-top: 100px;
+}
+
+#book .cover p {
+	text-align: center;
+	font-size: 20px;
+	margin: 0;
+	padding-top: 20px;
+}
+
+#book .loader {
+	background-image: url(loader.gif);
+	width: 24px;
+	height: 24px;
+	display: block;
+	position: absolute;
+	top: 238px;
+	left: 188px;
+}
+
+#book .data {
+	text-align: center;
+	font-size: 24px;
+	color: #333;
+	line-height: 1.6;
+	padding: 20px;
+}
+
+.page-footer {
+	position: absolute;
+	bottom: 10px;
+	width: 100%;
+	text-align: center;
+	font-size: 18px;
+	color: #333;
+}
+
+#controls {
+	width: 800px;
+	text-align: center;
+	margin: 20px 0px;
+	font: 30px 'Arial', sans-serif;
+}
+
+#controls input, #controls label {
+	font: 30px 'Arial', sans-serif;
+}
+
+#book .odd {
+	background-image: linear-gradient(to left, #a1c4fd 0%, #c2e9fb 100%);
+}
+
+#book .even {
+	background-image: linear-gradient(to left, #a1c4fd 0%, #c2e9fb 100%);
+}
+
+#prev-button, #next-button {
+	position: absolute;
+	top: 50%;
+	transform: translateY(-50%);
+	background-color: rgba(0, 0, 0, 0.5);
+	color: white;
+	border: none;
+	padding: 10px;
+	cursor: pointer;
+	font-size: 24px;
+	z-index: 1000;
+}
+
+#prev-button {
+	left: -40px;
+}
+
+#next-button {
+	right: -40px;
+}
+
+#prev-button:hover, #next-button:hover {
+	background-color: rgba(0, 0, 0, 0.8);
+}
+
+footer {
+	margin-top: 20px;
+	font-size: 18px;
+	color: #555;
+}
+</style>
+</head>
+<body>
+<center>
+<div id="book">
+	<div class="cover">
+		<h1 style="color: red;">The Rebirth of Karnasthan</h1>
+		<br><br><br>
+		<h4 style="color: lime;">About how a town rebuilds itself after a war.</h4><br><br><br>
+		<p>Written by Aditya Soni</p>
+	</div>
+</div>
+
+<div id="controls">
+    <label for="page-number">Page:</label>
+    <input style="background-color: yellow;" type="text" size="3" id="page-number">
+    of <span id="number-pages"></span>
+    <button style="background-color: white; color: black; font-weight: bolder; border-radius: 30px; height: 50px; width: 150px;" id="read-button">Read the Text<br><img style="width: 20px; height: 20px;" src="audio.png"></button>
+</div>
+
+
+<button style="margin-left: 200px;" id="prev-button">&#8592;</button>
+<button style="margin-right: 200px;" id="next-button">&#8594;</button>
+
+<footer style="color: black; font-weight: bolder; width: 1500px; height: 20px; background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(119,121,9,1) 0%, rgba(5,160,44,1) 0%, rgba(136,7,142,1) 0%, rgba(0,212,255,1) 100%);">
+	The Rebirth of Karnasthan, Written by Aditya Soni
+</footer>
+
+</center>
+
+<audio  id="turn-front-sound" src="turnfront.mp3"></audio>
+<audio id="turn-back-sound" src="turnback.mp3"></audio>
+
+<script type="text/javascript">
+
+	var numberOfPages = 36; 
+
+	var storyContent = [
+		"",
+		"Once upon a time, there lived two kings, Saksham Pratap and Lalaji Prasad, who ruled their kingdoms, Atiroopa and Tajasthan, respectively. Their bond was as strong as that of brothers, marked by fraternity and harmony. They celebrated festivals together, shared resources during difficult times, and their citizens admired ",
+		"the deep friendship between the two rulers.<img style='height: 250px; width: 350px;' src='kingomstart.jpg'/>Atiroopa & Tajasthan",
+		"One day, Saksham Pratap announced a competition in Atiroopa: the person who achieved the greatest feat, something even Saksham could not accomplish, would become the king after his retirement. The minister of Atiroopa, a greedy and ambitious man named Bhairav, coveted the throne. Seizing an opportunity,",
+		"he visited Lalaji Prasad's palace under the pretense of their friendly relations. Warmly welcomed, Bhairav was granted access to the artillery room. Taking advantage of this, he stole crucial war strategy papers and returned to Atiroopa. Armed with this knowledge, Bhairav led a surprise night attack on Tajasthan.",
+		"<img style='height: 250px; width: 350px;' src='warpapers.jpg'/><h7>Bhairav stole important war papers...<h7><img style='height: 60px; width: 350px;' src='attack.jpg'/>Night Attack!",
+		"The following morning, the newspapers blared the headline: Tajasthan Defeated by Atiroopa, Lalaji Prasad Imprisoned. Saksham Pratap was furious when he read the news and confronted his minister. Why did you do this? he demanded, his voice shaking with anger.Your Majesty, I did this for the achievement, ",
+		"Bhairav replied with a sly smile, expecting praise. You have ruined our relationship and stained our honor, Saksham retorted. In his rage, he executed the minister, severing his head with his sword. The act was swift, but the consequences were far-reaching. However, Lalaji Prasad, unaware of the minister's treachery, believed Saksham had",
+		"ordered the attack. Thus, a brutal war erupted between the two kingdoms. The war was relentless, and both sides suffered greatly.<img style='height: 250px; width: 350px;' src='news.jpg'/>",
+		"<img style='height: 250px; width: 350px;' src='headcut.jpg'/>Bhairav being sent to death by Saksham Pratap.......<img style='height: 70px; width: 350px;' src='cutoff.jpg'/>",
+		"Thousands perished, towns were destroyed, and buildings were reduced to rubble. Yet, both kings palaces remained intact, standing as silent witnesses to the devastation around them.<img style='height: 220px; width: 350px;' src='kingdomintact.jpg'/>",
+		"Among the many casualties was Bhairav’s younger brother, Arjun, who was only seven years old when the conflict began. Consumed by the desire for revenge, he found himself trapped in Tajasthan, living unnoticed in a bunker during the war. Arjun’s life in the bunker was one of isolation and routine. The bunker was a cold, cramped",
+		"space, its walls lined with shelves of canned food and water jugs. He spent his days reading whatever books he could find, often re-reading the same ones to pass the time. Nights were filled with the distant sounds of war, the ground occasionally shaking from nearby explosions. He learned to cook simple meals, rationing his food carefully to",
+		"make it last. The loneliness was overwhelming, and he often talked to his handmade soft toy, a figure resembling Karna from the Mahabharata, for comfort.<img style='height: 250px; width: 350px;' src='bunker.jpg'/>",
+		"One day, while searching through an old cabinet, Arjun discovered an old, dusty diary. The diary, written by a former military officer, contained code words for Atiroopa's missiles. Driven by a burning desire for revenge, Arjun made a fake phone call to Atiroopa's army: Dakota d620 at T-36 60°, East. Army head speaking, over and out.",
+		"Believing an enemy missile had been launched, Atiroopa’s army retaliated by targeting Tajasthan's palace. The conflict escalated into a missile war, causing widespread radiation and devastation. Those without access to bunkers perished from either the missile blasts or radiation. For a year, Arjun survived in his bunker,",
+		"his mind a cauldron of revenge and guilt. He meticulously recorded his daily observations, noting the changing weather patterns and radiation levels.<img style='height: 250px; width: 350px;' src='missile.jpg'/>",
+		"His experiments became his escape, as he tried to understand the world outside through the limited resources he had. He grew plants in small pots using artificial light, hoping to find a way to purify the air.<h1>Arjun's",
+		"<img style='height: 250px; width: 350px;' src='vent.jpg'/><h1>Bunker",
+		"Eventually, ministers from Aerocity, a nearby democratic city, arrived to aid the devastated kingdoms. Led by the wise and compassionate leader, Ananya, they rebuilt homes, assisted bunker survivors, and restored half of both kingdoms. Unaware of this progress, Arjun remained hidden, still fearful of radiation. Seven years later, now fifteen,",
+		"Arjun continued his experiments in his makeshift laboratory. One day, while cleaning an oxygen vent, he accidentally threw his handmade soft toy—a figure<img style='height: 250px; width: 350px;' src='karn.jpg'/>",
+		"resembling Karna from the Mahabharata—outside. Three months later, longing for his toy, he ventured out of the bunker. To his astonishment, the land was bright and flourishing. The sight of greenery and the sound of birds singing filled him with a sense of hope he hadn't felt in years. A golden-leaved tree bearing golden apple-like fruits",
+		"stood nearby. Hungry, Arjun ate the fruits and took some back for experimentation. He discovered that his soft toy had decomposed and transformed into the tree.<img style='height: 250px; width: 350px;' src='goldentree.jpg'/>",
+		"Consuming the fruits gave him superpowers: a golden armor appeared on his body, and a bow and arrow materialized in his hands. Arjun explored the rebuilt towns, noticing others with similar powers. However, these people were using their abilities destructively, stealing and spreading chaos. The kingdoms began to deteriorate again, with",
+		"plastic waste and garbage piling up everywhere. The people, having gained these powers easily, were careless in their use and neglected their responsibilities. Realizing his mistake, Arjun decided to rectify the situation. He spread a rumor: Those who gained Karna’s powers have had their lifespan reduced by 20 years.",
+		"However, throwing a plastic bottle into the Cambridge Hole, a deep mining pit, will extend their life by one month. Panicked, people began using their powers to collect and dump plastic into the hole.<h1>6km Deep</h1>",
+		"<img style='height: 250px; width: 350px;' src='cambridge.jpg'/><h1>Cambridge Hole</h1>",
+		"The rebuilding process was arduous. Arjun organized teams to clean the streets, repair homes, and restore order. The people, initially driven by fear, soon found a sense of purpose and community. They developed efficient recycling methods and created workshops to innovate new ways to utilize plastic waste. Slowly, the hole filled with plastic,",
+		"and the kingdoms were cleansed. People started using their powers for good, rebuilding towns with unity and strength. The process was not easy; it required cooperation and hard work. But as they saw their efforts bear fruit, a sense of pride and responsibility grew among them. Peace returned, and as people meditated,",
+		"their powers left their bodies, bringing inner peace to their souls. The powers condensed into clouds, a testament to their collective strength and wisdom.<img style='height: 250px; width: 350px;' src='cloud.jpg'/>",
+		"The two kingdoms merged, forming a new land named Karnasthan. The merging of the kingdoms was not just a political union but a cultural one as well.<img style='height: 250px; width: 350px;' src='merge.jpg'/>",
+		"Festivals were celebrated with renewed vigor, traditions from both lands interwoven into new customs that symbolized their unity.<img style='height: 250px; width: 350px;' src='festival.jpg'/>",
+		"The once devastated lands now thrived with lush fields, bustling markets, and joyous communities. Arjun, now seen as a hero, dedicated his life to ensuring the peace and prosperity of Karnasthan. He established schools and research centers, encouraging the young minds to learn from the past and innovate for the future.",
+		"The golden tree remained a symbol of their resilience and unity, a reminder of the power of redemption and collective effort. Once again, humanity triumphed, and peace and prosperity flourished in Karnasthan. The story of the two kings, their kingdoms, and the young boy who bridged the divide became a legend, inspiring generations to",
+		"come. And so, in the land of Karnasthan, the spirit of fraternity and harmony that once united Saksham Pratap and Lalaji Prasad lived on, stronger and more enduring than ever before.<img style='height: 200px; width: 350px;' src='peace.jpg'/>",
+		"<img style='height: 250px; width: 350px;' src='town.jpg'/><h5>The story about how a town rebuilds itself after a war - The Rebirth Of Karnasthan,<br> Written by - Aditya Soni</h5>"
+	];
+
+	function addPage(page, book) {
+		if (!book.turn('hasPage', page)) {
+			var content = storyContent[page - 1] || 'Content for page ' + page;
+			var element = $('<div />', {'class': 'page '+((page % 2 == 0) ? 'odd' : 'even'), 'id': 'page-'+page})
+					.html('<div class="data">' + content + '</div><div class="page-footer">Page ' + page + '</div>');
+			book.turn('addPage', element, page);
+		}
+	}
+
+	$(document).ready(function() {
+    // Existing turn.js initialization and setup
+    $('#book').turn({
+        acceleration: true,
+        pages: numberOfPages,
+        elevation: 50,
+        gradients: !$.isTouch,
+        when: {
+            turning: function(e, page, view) {
+                var book = $(this),
+                    currentPage = book.turn('page'),
+                    pages = book.turn('pages');
+
+                if (page == 1) {
+                    $('#prev-button').hide();
+                } else {
+                    $('#prev-button').show();
+                }
+
+                if (page == pages) {
+                    $('#next-button').hide();
+                } else {
+                    $('#next-button').show();
+                }
+
+                $('#page-number').val(page);
+            },
+            turned: function(e, page, view) {
+                $('#page-number').val(page);
+                var book = $(this);
+                $('#prev-button').toggle(page != 1);
+                $('#next-button').toggle(page != book.turn('pages'));
+            }
+        }
+    });
+
+    for (var page = 1; page <= numberOfPages; page++) {
+        addPage(page, $('#book'));
+    }
+
+    $('#number-pages').html(numberOfPages);
+
+    $('#page-number').keydown(function(e) {
+        if (e.keyCode == 13) {
+            $('#book').turn('page', $('#page-number').val());
+        }
+    });
+
+    $('#prev-button').click(function() {
+        $('#book').turn('previous');
+        document.getElementById('turn-back-sound').play();
+    });
+
+    $('#next-button').click(function() {
+        $('#book').turn('next');
+        document.getElementById('turn-front-sound').play();
+    });
+
+    document.getElementById('prev-button').style.display = 'none';
+
+    // Add event listener for the "Read the Text" button
+    $('#read-button').click(function() {
+        var currentPage = $('#book').turn('page');
+        playAudioForPage(currentPage);
+    });
+
+    function playAudioForPage(page) {
+        var audio = new Audio(page + '.mp3');
+        audio.play();
+    }
+});
+
+
+</script>
+</body>
+</html>
